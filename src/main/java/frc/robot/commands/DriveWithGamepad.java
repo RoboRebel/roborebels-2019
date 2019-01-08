@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class DriveWithGamepad extends Command {
-  boolean operatorControl;
   public DriveWithGamepad() {
     requires(Robot.drivetrain);
   }
@@ -19,16 +18,15 @@ public class DriveWithGamepad extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    operatorControl = true;
+
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(operatorControl)
-      Robot.drivetrain.tankDrive(
-        Robot.oi.getXboxController().getRawAxis(0), 
-        Robot.oi.getXboxController().getRawAxis(0));
+    Robot.drivetrain.tankDrive(
+      Robot.oi.getXboxController().getRawAxis(0),
+      Robot.oi.getXboxController().getRawAxis(0));
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -40,12 +38,13 @@ public class DriveWithGamepad extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.drivetrain.tankDrive(0,0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    operatorControl = false;
+    end();
   }
 }
