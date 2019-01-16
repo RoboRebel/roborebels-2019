@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import org.opencv.core.Mat;
 
 public class DriveWithGamepad extends Command {
   public DriveWithGamepad() {
@@ -24,9 +25,9 @@ public class DriveWithGamepad extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.drivetrain.tankDrive(
-      Robot.oi.getXboxController().getRawAxis(0),
-      Robot.oi.getXboxController().getRawAxis(0));
+    double left = (-Robot.oi.getXboxController().getRawAxis(1)) + (Robot.oi.getXboxController().getRawAxis(3) - Robot.oi.getXboxController().getRawAxis(2));
+    double right = (-Robot.oi.getXboxController().getRawAxis(5)) + (Robot.oi.getXboxController().getRawAxis(3) - Robot.oi.getXboxController().getRawAxis(2));
+    Robot.drivetrain.tankDrive(trim(left), trim(right));
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -46,5 +47,17 @@ public class DriveWithGamepad extends Command {
   @Override
   protected void interrupted() {
     end();
+  }
+
+  private double trim(double x){
+    if(x == 0)
+      return 0.0;
+    boolean neg = x < 0.0;
+    x = Math.abs(x);
+    if(x > 1.0)
+      x = 1.0;
+    if (x < 0.2)
+      x = 0.0;
+    return neg ? -x : x;
   }
 }

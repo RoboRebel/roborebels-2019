@@ -8,6 +8,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.OneSensorLineTrack;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -42,10 +44,14 @@ public class OI {
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
 
-  Joystick xboxController;
+  private final Joystick xboxController;
+  private final JoystickButton lineTrackButton;
 
   public OI(){
     xboxController = new Joystick(0);
+
+    lineTrackButton = new JoystickButton(xboxController, 1);
+    lineTrackButton.whileHeld(new OneSensorLineTrack());
   }
 
   public Joystick getXboxController(){

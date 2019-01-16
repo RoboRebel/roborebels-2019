@@ -24,8 +24,10 @@ public class RobotMap {
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
 
-  public static final int FRONT_RIGHT_VICTOR = 0;
-  public static final int BACK_RIGHT_VICTOR = 1;
-  public static final int FRONT_LEFT_VICTOR = 2;
-  public static final int BACK_LEFT_VICTOR = 3;
+  public static final int FRONT_RIGHT_VICTOR = 2;
+  public static final int BACK_RIGHT_VICTOR = 3;
+  public static final int FRONT_LEFT_VICTOR = 0;
+  public static final int BACK_LEFT_VICTOR = 1;
+
+  public static final int LIGHT_SENSOR_DIO_PORT = 0;
 }

@@ -31,7 +31,7 @@ public class Drivetrain extends Subsystem {
 
   public void tankDrive(double leftSpeed, double rightSpeed){
     this.left.set(leftSpeed);
-    this.right.set(rightSpeed);
+    this.right.set(-rightSpeed);
   }
 
   @Override
