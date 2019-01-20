@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.DriveToWall;
 import frc.robot.commands.OneSensorLineTrack;
 
 /**
@@ -46,12 +47,16 @@ public class OI {
 
   private final Joystick xboxController;
   private final JoystickButton lineTrackButton;
+  private final JoystickButton wallDriveButton;
 
   public OI(){
     xboxController = new Joystick(0);
 
     lineTrackButton = new JoystickButton(xboxController, 1);
     lineTrackButton.whileHeld(new OneSensorLineTrack());
+
+    wallDriveButton = new JoystickButton(xboxController, 2);
+    wallDriveButton.whileHeld(new DriveToWall());
   }
 
   public Joystick getXboxController(){
