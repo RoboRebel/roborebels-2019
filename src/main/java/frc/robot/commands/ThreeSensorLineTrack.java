@@ -21,7 +21,25 @@ public class ThreeSensorLineTrack extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-
+        int[] data = {0, 0, 0};
+        switch(data[0] + 2 * data[1] + 4 * data[2] ) { // converts it to binary to make comparing easier
+            case 0b000:
+            case 0b010:
+            case 0b110:
+            case 0b011:
+            case 0b101:
+            case 0b111:
+                System.out.println("Straight");
+                break;
+            case 0b100:
+                System.out.println("Clockwise");
+                break;
+            case 0b001:
+                System.out.println("Counter Clockwise");
+                break;
+            default:
+                System.out.println("Something has gone very wrong.");
+        }
     }
 
     // Make this return true when this Command no longer needs to run execute()
