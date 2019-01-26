@@ -69,6 +69,7 @@ public class Sensors extends Subsystem {
     public void updateShuffleboard(){
         SmartDashboard.putBoolean("Photoswitch status", getPhotoswitchStatus());
         SmartDashboard.putBoolean("Photoswitch2 status", getPhotoswitch2Status());
+        SmartDashboard.putBoolean("Photoswitch3 status", getPhotoswitch3Status());
         SmartDashboard.putNumber("LIDAR Distance (cm)", getLidarDistance());
         SmartDashboard.putNumber("LIDAR Distance (in)", ((double) getLidarDistance()) / 2.54);
         SmartDashboard.putNumber("Right Encoder", Robot.drivetrain.getRightEncoderSpeed());

@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.DriveStraight;
 import frc.robot.commands.DriveToWall;
 import frc.robot.commands.OneSensorLineTrack;
+import frc.robot.commands.ThreeSensorLineTrack;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -47,21 +48,25 @@ public class OI {
   // button.whenReleased(new ExampleCommand());
 
   private final Joystick xboxController;
-  private final JoystickButton lineTrackButton;
+  private final JoystickButton oneLineTrackButton;
   private final JoystickButton wallDriveButton;
   private final JoystickButton driveStraightButton;
+  private final JoystickButton threeLineTrackButton;
 
   public OI(){
     xboxController = new Joystick(0);
 
-    lineTrackButton = new JoystickButton(xboxController, 1);
-    lineTrackButton.whileHeld(new OneSensorLineTrack());
+    oneLineTrackButton = new JoystickButton(xboxController, 1);
+    oneLineTrackButton.whileHeld(new OneSensorLineTrack());
 
     wallDriveButton = new JoystickButton(xboxController, 2);
     wallDriveButton.whileHeld(new DriveToWall());
 
     driveStraightButton = new JoystickButton(xboxController, 3);
     driveStraightButton.whileHeld(new DriveStraight());
+
+    threeLineTrackButton = new JoystickButton(xboxController, 4);
+    threeLineTrackButton.whileHeld(new ThreeSensorLineTrack());
   }
 
   public Joystick getXboxController(){

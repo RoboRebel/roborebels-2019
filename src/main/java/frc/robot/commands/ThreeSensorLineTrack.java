@@ -7,11 +7,6 @@ import java.util.Arrays;
 
 public class ThreeSensorLineTrack extends Command {
     private double startAngle;
-
-    public ThreeSensorLineTrack() {
-        requires(Robot.sensors);
-    }
-
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
