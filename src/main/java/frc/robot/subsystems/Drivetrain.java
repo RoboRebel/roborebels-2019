@@ -7,10 +7,12 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveWithGamepad;
 
@@ -19,6 +21,7 @@ import frc.robot.commands.DriveWithGamepad;
  */
 public class Drivetrain extends Subsystem {
   private SpeedController left, right;
+  private Encoder leftEncoder, rightEncoder;
 
   public Drivetrain(){
     left = new SpeedControllerGroup(
@@ -27,11 +30,34 @@ public class Drivetrain extends Subsystem {
     right = new SpeedControllerGroup(
       new PWMVictorSPX(RobotMap.FRONT_RIGHT_VICTOR), 
       new PWMVictorSPX(RobotMap.BACK_RIGHT_VICTOR));
+
+    leftEncoder = new Encoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B);
+    leftEncoder.setDistancePerPulse((7.0 * Math.PI)/360.0);
+
+    rightEncoder = new Encoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B);
+    rightEncoder.setDistancePerPulse((7.0 * Math.PI)/360.0);
+
   }
 
   public void tankDrive(double leftSpeed, double rightSpeed){
     this.left.set(leftSpeed);
     this.right.set(-rightSpeed);
+  }
+
+  public double getLeftEncoderSpeed(){
+    return leftEncoder.getRate();
+  }
+
+  public double getRightEncoderSpeed(){
+    return rightEncoder.getRate();
+  }
+
+  public double getRightEncoderDistance(){
+    return rightEncoder.getDistance();
+  }
+
+  public double getLeftEncoderDistance(){
+    return leftEncoder.getDistance();
   }
 
   @Override

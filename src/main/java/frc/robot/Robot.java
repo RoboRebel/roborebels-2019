@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.Sensors;
 
 /**
@@ -26,6 +27,7 @@ import frc.robot.subsystems.Sensors;
 public class Robot extends TimedRobot {
   public static Drivetrain drivetrain = new Drivetrain();
   public static Sensors sensors = new Sensors();
+  public static Pneumatics pneumatics = new Pneumatics();
   public static OI oi;
 
   /**

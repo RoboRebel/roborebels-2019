@@ -11,7 +11,7 @@ public class DriveToWall extends Command {
 
     @Override
     protected void execute() {
-        if(Robot.sensors.getAvgLidarDistance() < 150) {
+        if(Robot.sensors.getAvgLidarDistance() < 70) {
             Robot.drivetrain.tankDrive(0.2, 0.1);
         }else {
             Robot.drivetrain.tankDrive(0.5, 0.4);
@@ -20,7 +20,7 @@ public class DriveToWall extends Command {
 
     @Override
     protected boolean isFinished() {
-        return Robot.sensors.getAvgLidarDistance() < 50;
+        return Robot.sensors.getAvgLidarDistance() < 30;
     }
 
     @Override

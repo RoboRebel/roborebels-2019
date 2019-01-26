@@ -29,5 +29,18 @@ public class RobotMap {
   public static final int FRONT_LEFT_VICTOR = 0;
   public static final int BACK_LEFT_VICTOR = 1;
 
+  public static final int LEFT_ENCODER_CHANNEL_A = 1;
+  public static final int LEFT_ENCODER_CHANNEL_B = 2;
+  public static final int RIGHT_ENCODER_CHANNEL_A = 3;
+  public static final int RIGHT_ENCODER_CHANNEL_B = 4;
+
+  public static final int FRONT_RIGHT_CLIMBING_SOLENOID = 0;
+  public static final int FRONT_LEFT_CLIMBING_SOLENOID = 1;
+  public static final int BACK_RIGHT_CLIMBING_SOLENOID = 2;
+  public static final int BACK_LEFT_CLIMBING_SOLENOID = 3;
+  public static final int HATCH_HOLDING_SOLENOID = 4;
+  public static final int HATCH_PUSHING_SOLENOID = 5;
+
   public static final int LIGHT_SENSOR_DIO_PORT = 0;
+  public static final int LIGHT_SENSOR_2_DIO_PORT = 5;
 }
