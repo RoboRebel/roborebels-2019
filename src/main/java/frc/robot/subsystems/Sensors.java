@@ -13,14 +13,16 @@ public class Sensors extends Subsystem {
 
     private final DigitalInput photoswitch;
     private final DigitalInput photoswitch2;
+    private final DigitalInput photoswitch3;
     private final Lidar lidar;
     private final AHRS navx;
 
     private int[] lidarValues;
 
     public Sensors(){
-        photoswitch = new DigitalInput(RobotMap.LIGHT_SENSOR_DIO_PORT);
+        photoswitch = new DigitalInput(RobotMap.LIGHT_SENSOR_1_DIO_PORT);
         photoswitch2 = new DigitalInput(RobotMap.LIGHT_SENSOR_2_DIO_PORT);
+        photoswitch3 = new DigitalInput(RobotMap.LIGHT_SENSOR_3_DIO_PORT);
         lidar = new Lidar(I2C.Port.kMXP, (byte) 0x62);
         navx = new AHRS(SPI.Port.kMXP);
         lidarValues = new int[NUM_SAMPLES];
@@ -32,6 +34,10 @@ public class Sensors extends Subsystem {
 
     public boolean getPhotoswitch2Status(){
         return !photoswitch2.get();
+    }
+
+    public boolean getPhotoswitch3Status(){
+        return photoswitch3.get();
     }
 
     public int getLidarDistance(){

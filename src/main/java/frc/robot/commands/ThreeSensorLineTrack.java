@@ -21,7 +21,7 @@ public class ThreeSensorLineTrack extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        int[] data = {Robot.sensors.getPhotoswitchStatus() ? 1 : 0, Robot.sensors.getPhotoswitch2Status() ? 1 : 0, 0};
+        int[] data = {Robot.sensors.getPhotoswitchStatus() ? 1 : 0, Robot.sensors.getPhotoswitch2Status() ? 1 : 0, Robot.sensors.getPhotoswitch3Status() ? 1 : 0};
         switch(data[0] + 2 * data[1] + 4 * data[2] ) { // converts it to binary to make comparing easier
             case 0b000:
             case 0b010:
