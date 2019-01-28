@@ -20,7 +20,7 @@ public class OneSensorLineTrack extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        if(Robot.sensors.getPhotoswitchStatus()){
+        if(Robot.sensors.getPhotoswitchStatus(1)){
             Robot.drivetrain.tankDrive(0.0, 0.4);
         }else{
             Robot.drivetrain.tankDrive(0.4, -0.1);

@@ -7,7 +7,11 @@ import java.util.Arrays;
 
 public class ThreeSensorLineTrack extends Command {
     private double startAngle;
-    // Called just before this Command runs the first time
+
+    public ThreeSensorLineTrack(){
+        requires(Robot.drivetrain);
+    }
+
     @Override
     protected void initialize() {
         startAngle = Robot.sensors.getNavXYaw();
@@ -16,21 +20,25 @@ public class ThreeSensorLineTrack extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        int[] data = {Robot.sensors.getPhotoswitchStatus() ? 1 : 0, Robot.sensors.getPhotoswitch2Status() ? 1 : 0, Robot.sensors.getPhotoswitch3Status() ? 1 : 0};
+        int[] data = Robot.sensors.getPhotoswitchStatuses();
         switch(data[0] + 2 * data[1] + 4 * data[2] ) { // converts it to binary to make comparing easier
             case 0b000:
             case 0b010:
-            case 0b110:
-            case 0b011:
             case 0b101:
             case 0b111:
-                System.out.println("Straight");
+                Robot.drivetrain.tankDrive(0.2, 0.2);
                 break;
             case 0b100:
-                System.out.println("Clockwise");
+                Robot.drivetrain.tankDrive(-0.3, 0.3);
                 break;
             case 0b001:
-                System.out.println("Counter Clockwise");
+                Robot.drivetrain.tankDrive(0.3, -0.3);
+                break;
+            case 0b110:
+                Robot.drivetrain.tankDrive(0, 0.2);
+                break;
+            case 0b011:
+                Robot.drivetrain.tankDrive(0.2, 0);
                 break;
             default:
                 System.out.println("Something has gone very wrong.");
@@ -46,11 +54,13 @@ public class ThreeSensorLineTrack extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
+        Robot.drivetrain.tankDrive(0,0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
+        this.end();
     }
 }

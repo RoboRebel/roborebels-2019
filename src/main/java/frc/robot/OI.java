@@ -9,7 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.DriveStraight;
+import frc.robot.commands.GyroDriveStraight;
 import frc.robot.commands.DriveToWall;
 import frc.robot.commands.OneSensorLineTrack;
 import frc.robot.commands.ThreeSensorLineTrack;
@@ -63,7 +63,7 @@ public class OI {
     wallDriveButton.whileHeld(new DriveToWall());
 
     driveStraightButton = new JoystickButton(xboxController, 3);
-    driveStraightButton.whileHeld(new DriveStraight());
+    driveStraightButton.whileHeld(new GyroDriveStraight());
 
     threeLineTrackButton = new JoystickButton(xboxController, 4);
     threeLineTrackButton.whileHeld(new ThreeSensorLineTrack());

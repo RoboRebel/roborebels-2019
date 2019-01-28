@@ -4,6 +4,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class DriveToWall extends Command {
+    public DriveToWall(){
+        requires(Robot.drivetrain);
+    }
 
     @Override
     protected void initialize() {
