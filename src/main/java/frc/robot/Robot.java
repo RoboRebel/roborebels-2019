@@ -13,9 +13,12 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.BuzzBuzz;
+import frc.robot.commands.Shoot;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.Sensors;
+import frc.robot.subsystems.Shooter;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,6 +31,7 @@ public class Robot extends TimedRobot {
   public static Drivetrain drivetrain = new Drivetrain();
   public static Sensors sensors = new Sensors();
   public static Pneumatics pneumatics = new Pneumatics();
+  public static Shooter shooter = new Shooter();
   public static OI oi;
 
   /**
@@ -53,7 +57,7 @@ public class Robot extends TimedRobot {
 
   /**
    * This function is called once each time the robot enters Disabled mode.
-   * You can use it to reset any subsystem information you want to clear when
+   * You can use it to resetTest any subsystem information you want to clear when
    * the robot is disabled.
    */
   @Override
@@ -79,6 +83,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    (new BuzzBuzz()).start();
   }
 
   /**

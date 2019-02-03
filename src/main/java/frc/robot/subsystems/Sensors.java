@@ -70,15 +70,16 @@ public class Sensors extends Subsystem {
         SmartDashboard.putBoolean("Photoswitch1 status", getPhotoswitchStatus(0));
         SmartDashboard.putBoolean("Photoswitch2 status", getPhotoswitchStatus(1));
         SmartDashboard.putBoolean("Photoswitch3 status", getPhotoswitchStatus(2));
-        SmartDashboard.putString("Photoswitch Binary String", Integer.toBinaryString(getPhotoswitchStatuses()[0]+getPhotoswitchStatuses()[1]*2+ getPhotoswitchStatuses()[2]*3));
-        SmartDashboard.putNumber("LIDAR Distance (cm)", getLidarDistance());
-        SmartDashboard.putNumber("LIDAR Distance (in)", ((double) getLidarDistance()) / 2.54);
+//        SmartDashboard.putString("Photoswitch Binary String", Integer.toBinaryString(getPhotoswitchStatuses()[0]+getPhotoswitchStatuses()[1]*2+ getPhotoswitchStatuses()[2]*3));
+//        SmartDashboard.putNumber("LIDAR Distance (cm)", getLidarDistance());
+//        SmartDashboard.putNumber("LIDAR Distance (in)", ((double) getLidarDistance()) / 2.54);
         SmartDashboard.putNumber("Right Encoder", Robot.drivetrain.getRightEncoderSpeed());
         SmartDashboard.putNumber("Left Encoder", Robot.drivetrain.getLeftEncoderSpeed());
         SmartDashboard.putNumber("Right encoder distance", Robot.drivetrain.getRightEncoderDistance());
         SmartDashboard.putNumber("Left encoder distance", Robot.drivetrain.getLeftEncoderDistance());
-        SmartDashboard.putNumber("AVG LIDAR Distance (in)", getAvgLidarDistance());
+//        SmartDashboard.putNumber("AVG LIDAR Distance (in)", getAvgLidarDistance());
         SmartDashboard.putNumber("NavX Yaw", getNavXYaw());
+        SmartDashboard.putNumber("POV", Robot.oi.getXboxController().getPOV());
     }
 
     @Override

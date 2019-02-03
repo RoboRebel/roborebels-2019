@@ -14,10 +14,10 @@ public class DriveToWall extends Command {
 
     @Override
     protected void execute() {
-        if(Robot.sensors.getAvgLidarDistance() < 70) {
+        if(Robot.sensors.getAvgLidarDistance() < 100) {
             Robot.drivetrain.tankDrive(0.2, 0.1);
         }else {
-            Robot.drivetrain.tankDrive(0.5, 0.4);
+            Robot.drivetrain.tankDrive(0.7, 0.7);
         }
     }
 

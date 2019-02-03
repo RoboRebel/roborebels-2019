@@ -25,8 +25,8 @@ public class DriveWithGamepad extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double left = (-Robot.oi.getXboxController().getRawAxis(1)) + (Robot.oi.getXboxController().getRawAxis(3) - Robot.oi.getXboxController().getRawAxis(2));
-    double right = (-Robot.oi.getXboxController().getRawAxis(5)) + (Robot.oi.getXboxController().getRawAxis(3) - Robot.oi.getXboxController().getRawAxis(2));
+    double left = (-trim(Robot.oi.getXboxController().getRawAxis(1))) + (trim(Robot.oi.getXboxController().getRawAxis(3)) - trim(Robot.oi.getXboxController().getRawAxis(2)));
+    double right = (-trim(Robot.oi.getXboxController().getRawAxis(5))) + (trim(Robot.oi.getXboxController().getRawAxis(3)) - trim(Robot.oi.getXboxController().getRawAxis(2)));
     Robot.drivetrain.tankDrive(trim(left), trim(right));
   }
 

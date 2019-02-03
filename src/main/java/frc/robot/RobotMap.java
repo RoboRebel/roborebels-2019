@@ -24,10 +24,13 @@ public class RobotMap {
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
 
-  public static final int FRONT_RIGHT_VICTOR = 2;
-  public static final int BACK_RIGHT_VICTOR = 3;
-  public static final int FRONT_LEFT_VICTOR = 0;
-  public static final int BACK_LEFT_VICTOR = 1;
+  public static final int FRONT_RIGHT_CANTALON = 3;
+  public static final int BACK_RIGHT_CANTALON = 2;
+  public static final int FRONT_LEFT_CANTALON = 1;
+  public static final int BACK_LEFT_CANTALON = 0;
+
+  public static final int TOP_SHOOTER_CANVICTOR = 0;
+  public static final int BOTTOM_SHOOTER_CANVICTOR = 1;
 
   public static final int LEFT_ENCODER_CHANNEL_A = 1;
   public static final int LEFT_ENCODER_CHANNEL_B = 2;

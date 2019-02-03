@@ -7,12 +7,11 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.GyroDriveStraight;
-import frc.robot.commands.DriveToWall;
-import frc.robot.commands.OneSensorLineTrack;
-import frc.robot.commands.ThreeSensorLineTrack;
+import frc.robot.commands.*;
+import frc.robot.sensors.DPadTrigger;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -52,6 +51,16 @@ public class OI {
   private final JoystickButton wallDriveButton;
   private final JoystickButton driveStraightButton;
   private final JoystickButton threeLineTrackButton;
+  private final JoystickButton acquireLineButton;
+  private final JoystickButton PIDDriveButton;
+  private final JoystickButton shootButton;
+  private final DPadTrigger testPneumaticsButton;
+  private final DPadTrigger testDrivetrainButton;
+  private final DPadTrigger testShooterButton;
+
+  public enum Side{
+    Left, Right, Both
+  }
 
   public OI(){
     xboxController = new Joystick(0);
@@ -67,9 +76,43 @@ public class OI {
 
     threeLineTrackButton = new JoystickButton(xboxController, 4);
     threeLineTrackButton.whileHeld(new ThreeSensorLineTrack());
+
+    acquireLineButton = new JoystickButton(xboxController, 5);
+    acquireLineButton.whileHeld(new AcquireLine());
+
+    PIDDriveButton = new JoystickButton(xboxController, 6);
+    PIDDriveButton.whileHeld(new PIDDriveStraight());
+
+    shootButton = new JoystickButton(xboxController, 7);
+    shootButton.whileHeld(new Shoot());
+
+    testPneumaticsButton = new DPadTrigger(xboxController, 0);
+    testPneumaticsButton.whileActive(new TestSubsystem(Robot.pneumatics));
+
+    testDrivetrainButton = new DPadTrigger(xboxController, 90);
+    testDrivetrainButton.whileActive(new TestSubsystem(Robot.drivetrain));
+
+    testShooterButton = new DPadTrigger(xboxController, 180);
+    testShooterButton.whileActive(new TestSubsystem(Robot.shooter));
   }
 
   public Joystick getXboxController(){
     return this.xboxController;
+  }
+
+  public void buzz(double intensity, Side side){
+    switch (side){
+      case Left:
+        this.xboxController.setRumble(GenericHID.RumbleType.kLeftRumble, intensity);
+        this.xboxController.setRumble(GenericHID.RumbleType.kRightRumble, 0);
+        break;
+      case Right:
+        this.xboxController.setRumble(GenericHID.RumbleType.kLeftRumble, 0);
+        this.xboxController.setRumble(GenericHID.RumbleType.kRightRumble, intensity);
+        break;
+      case Both:
+        this.xboxController.setRumble(GenericHID.RumbleType.kLeftRumble, intensity);
+        this.xboxController.setRumble(GenericHID.RumbleType.kRightRumble, intensity);
+    }
   }
 }
