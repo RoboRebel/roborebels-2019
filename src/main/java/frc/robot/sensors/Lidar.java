@@ -5,12 +5,14 @@ import java.util.TimerTask;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.I2C.Port;
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.PIDSourceType;
 
 
 //taken from this chiefdelphi post
 //https://www.chiefdelphi.com/t/how-do-i-use-the-lidar-with-a-navx-mxp/161381/10
 
-public class Lidar {
+public class Lidar implements PIDSource {
 
     private I2C i2c;
     private java.util.Timer updater;
@@ -103,4 +105,17 @@ public class Lidar {
         return buffer.getShort(0) & 0xFFFF;
     }
 
+    @Override
+    public void setPIDSourceType(PIDSourceType pidSource) {
+    }
+
+    @Override
+    public PIDSourceType getPIDSourceType() {
+        return PIDSourceType.kDisplacement;
+    }
+
+    @Override
+    public double pidGet() {
+        return getDistance();
+    }
 }

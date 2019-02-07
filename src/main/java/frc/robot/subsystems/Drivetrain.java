@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveWithGamepad;
 import frc.robot.interfaces.Testable;
@@ -21,33 +22,24 @@ import java.util.ArrayList;
  */
 public class Drivetrain extends Subsystem implements Testable {
   private SpeedController left, right;
-  private Encoder leftEncoder, rightEncoder;
   private ArrayList<WPI_TalonSRX> testList;
+  private WPI_TalonSRX frontLeft, frontRight, backLeft, backRight;
 
   public Drivetrain(){
     testList = new ArrayList<>();
 
-    WPI_TalonSRX frontLeft = new WPI_TalonSRX(RobotMap.FRONT_LEFT_CANTALON);
+    frontLeft = new WPI_TalonSRX(RobotMap.FRONT_LEFT_CANTALON);
     testList.add(frontLeft);
-    WPI_TalonSRX backLeft = new WPI_TalonSRX(RobotMap.BACK_LEFT_CANTALON);
+    backLeft = new WPI_TalonSRX(RobotMap.BACK_LEFT_CANTALON);
     testList.add(backLeft);
     left = new SpeedControllerGroup(frontLeft, backLeft);
 
-    WPI_TalonSRX frontRight = new WPI_TalonSRX(RobotMap.FRONT_RIGHT_CANTALON);
+    frontRight = new WPI_TalonSRX(RobotMap.FRONT_RIGHT_CANTALON);
     testList.add(frontRight);
-    WPI_TalonSRX backRight = new WPI_TalonSRX(RobotMap.BACK_RIGHT_CANTALON);
+    backRight = new WPI_TalonSRX(RobotMap.BACK_RIGHT_CANTALON);
     testList.add(backRight);
     right = new SpeedControllerGroup(frontRight, backRight);
     right.setInverted(true);
-
-    leftEncoder = new Encoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B);
-    leftEncoder.setPIDSourceType(PIDSourceType.kRate);
-    leftEncoder.setDistancePerPulse(-(7.0 * Math.PI)/360.0);
-
-    rightEncoder = new Encoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B);
-    rightEncoder.setPIDSourceType(PIDSourceType.kRate);
-    rightEncoder.setDistancePerPulse((7.0 * Math.PI)/360.0);
-
   }
 
   public void tankDrive(double leftSpeed, double rightSpeed){
@@ -56,27 +48,27 @@ public class Drivetrain extends Subsystem implements Testable {
   }
 
   public double getLeftEncoderSpeed(){
-    return leftEncoder.getRate();
+    return frontLeft.getSelectedSensorVelocity();
   }
 
   public double getRightEncoderSpeed(){
-    return rightEncoder.getRate();
+    return backRight.getSelectedSensorVelocity();
   }
 
   public double getRightEncoderDistance(){
-    return rightEncoder.getDistance();
+    return backRight.getSelectedSensorPosition();
   }
 
   public double getLeftEncoderDistance(){
-    return leftEncoder.getDistance();
+    return frontLeft.getSelectedSensorPosition();
   }
 
-  public Encoder getLeftEncoder(){
-    return leftEncoder;
+  public WPI_TalonSRX getLeftEncoderTalon(){
+    return RobotMap.LEFT_ENCODER_FRONT ? frontLeft : backLeft;
   }
 
-  public Encoder getRightEncoder(){
-    return rightEncoder;
+  public WPI_TalonSRX getRightEncoderTalon(){
+    return RobotMap.RIGHT_ENCODER_FRONT ? frontRight : backRight;
   }
 
   public SpeedController getLeft(){

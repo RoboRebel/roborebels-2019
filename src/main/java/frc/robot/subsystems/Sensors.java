@@ -6,9 +6,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.interfaces.Testable;
 import frc.robot.sensors.Lidar;
 
-public class Sensors extends Subsystem {
+import java.util.ArrayList;
+
+public class Sensors extends Subsystem implements Testable {
+
+    private enum SensorType{
+        PID, Digital
+    }
+
     private final int NUM_SAMPLES = 10;
     public final int NUM_PHOTOSWITCHES = 3;
 
@@ -19,7 +27,10 @@ public class Sensors extends Subsystem {
 
     private final AHRS navx;
 
+    private final ArrayList testUnits;
+
     public Sensors(){
+        testUnits = new ArrayList();
         photoswitches = new DigitalInput[NUM_PHOTOSWITCHES];
         for(int i = 0; i < NUM_PHOTOSWITCHES; i++)
             photoswitches[i] = new DigitalInput(RobotMap.LIGHT_SENSOR_DIO_PORTS[i]);
@@ -77,7 +88,7 @@ public class Sensors extends Subsystem {
         SmartDashboard.putNumber("Left Encoder", Robot.drivetrain.getLeftEncoderSpeed());
         SmartDashboard.putNumber("Right encoder distance", Robot.drivetrain.getRightEncoderDistance());
         SmartDashboard.putNumber("Left encoder distance", Robot.drivetrain.getLeftEncoderDistance());
-//        SmartDashboard.putNumber("AVG LIDAR Distance (in)", getAvgLidarDistance());
+        SmartDashboard.putNumber("AVG LIDAR Distance (in)", getAvgLidarDistance());
         SmartDashboard.putNumber("NavX Yaw", getNavXYaw());
         SmartDashboard.putNumber("POV", Robot.oi.getXboxController().getPOV());
     }
@@ -86,4 +97,48 @@ public class Sensors extends Subsystem {
     protected void initDefaultCommand() {
 
     }
+
+    @Override
+    public void testUnit(int index, boolean status) {
+
+    }
+
+    @Override
+    public void resetTest() {
+
+    }
+
+    @Override
+    public int getUnitAmount() {
+        return 0;
+    }
+
+    @Override
+    public Subsystem getRobotSubsystem() {
+        return null;
+    }
+
+//    private class TestableSensor{
+//        private DigitalInput digSensor;
+//        private PIDSource pidSensor;
+//        private String name;
+//        private SensorType type;
+//        private double last;
+//
+//        TestableSensor(DigitalInput sensor, String name){
+//            digSensor = sensor;
+//            type = SensorType.Digital;
+//            this.name = name;
+//        }
+//
+//        TestableSensor(PIDSource sensor, String name){
+//            pidSensor = sensor;
+//            type = SensorType.PID;
+//            this.name = name;
+//        }
+//
+//        void test(){
+//            double current;
+//        }
+//    }
 }

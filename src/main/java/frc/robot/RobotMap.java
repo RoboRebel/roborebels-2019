@@ -29,6 +29,9 @@ public class RobotMap {
   public static final int FRONT_LEFT_CANTALON = 1;
   public static final int BACK_LEFT_CANTALON = 0;
 
+  public static final boolean RIGHT_ENCODER_FRONT = false;
+  public static final boolean LEFT_ENCODER_FRONT = true;
+
   public static final int TOP_SHOOTER_CANVICTOR = 0;
   public static final int BOTTOM_SHOOTER_CANVICTOR = 1;
 

@@ -1,6 +1,9 @@
 package frc.robot.commands;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
@@ -15,9 +18,9 @@ public class PIDDriveStraight extends Command {
 
     public PIDDriveStraight() {
         requires(Robot.drivetrain);
-        left = new PIDController(k_P, k_I, k_D, Robot.drivetrain.getLeftEncoder(), Robot.drivetrain.getLeft());
+        left = new PIDController(k_P, k_I, k_D, new TalonPIDOutput(Robot.drivetrain.getLeftEncoderTalon()), Robot.drivetrain.getLeft());
         left.setOutputRange(0.0, 0.5);
-        right = new PIDController(k_P, k_I, k_D, Robot.drivetrain.getRightEncoder(), Robot.drivetrain.getRight());
+        right = new PIDController(k_P, k_I, k_D, new TalonPIDOutput(Robot.drivetrain.getRightEncoderTalon()), Robot.drivetrain.getRight());
         right.setOutputRange(0.0, 0.5);
     }
 
@@ -55,5 +58,29 @@ public class PIDDriveStraight extends Command {
     @Override
     protected void interrupted() {
         this.end();
+    }
+
+    private class TalonPIDOutput implements PIDSource{
+        private WPI_TalonSRX talonSRX;
+        private PIDSourceType pidSourceType;
+
+        TalonPIDOutput(WPI_TalonSRX talonSRX){
+            this.talonSRX = talonSRX;
+        }
+
+        @Override
+        public void setPIDSourceType(PIDSourceType pidSource) {
+            pidSourceType = pidSource;
+        }
+
+        @Override
+        public PIDSourceType getPIDSourceType() {
+            return pidSourceType;
+        }
+
+        @Override
+        public double pidGet() {
+            return pidSourceType == PIDSourceType.kDisplacement ? talonSRX.getSelectedSensorPosition() : talonSRX.getSelectedSensorVelocity();
+        }
     }
 }
