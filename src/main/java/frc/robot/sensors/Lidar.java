@@ -7,12 +7,13 @@ import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
+import frc.robot.interfaces.TestableSensor;
 
 
 //taken from this chiefdelphi post
 //https://www.chiefdelphi.com/t/how-do-i-use-the-lidar-with-a-navx-mxp/161381/10
 
-public class Lidar implements PIDSource {
+public class Lidar implements PIDSource, TestableSensor {
 
     private I2C i2c;
     private java.util.Timer updater;
@@ -33,7 +34,14 @@ public class Lidar implements PIDSource {
     private static final int UPDATE_PERIOD = 20; // in milliseconds
     private static final int RETRY_COUNT = 50;
 
+    private final Port port;
+
+    private int testResult;
+    private int testAccum;
+    private int testAmount;
+
     public Lidar(Port port, byte address) {
+        this.port = port;
         i2c = new I2C(port, address);
 
         setup();
@@ -117,5 +125,24 @@ public class Lidar implements PIDSource {
     @Override
     public double pidGet() {
         return getDistance();
+    }
+
+    @Override
+    public void resetTest(){
+        testAmount = 0;
+        testResult = 0;
+        testAccum = 0;
+    }
+
+    @Override
+    public void test() {
+        testAmount++;
+        testAccum += getDistance();
+        testResult = testAccum / testAmount;
+    }
+
+    @Override
+    public String getStatus() {
+        return String.format("LIDAR on port %s average distance(mm) over test: %d", port.name() ,testResult);
     }
 }

@@ -57,6 +57,7 @@ public class OI {
   private final DPadTrigger testPneumaticsButton;
   private final DPadTrigger testDrivetrainButton;
   private final DPadTrigger testShooterButton;
+  private final DPadTrigger testSensorButton;
 
   public enum Side{
     Left, Right, Both
@@ -94,6 +95,9 @@ public class OI {
 
     testShooterButton = new DPadTrigger(xboxController, 180);
     testShooterButton.whileActive(new TestSubsystem(Robot.shooter));
+
+    testSensorButton = new DPadTrigger(xboxController, 270);
+    testSensorButton.whileActive(new TestSubsystem(Robot.sensors));
   }
 
   public Joystick getXboxController(){

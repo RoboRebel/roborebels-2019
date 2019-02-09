@@ -4,6 +4,9 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.interfaces.TestableSensor;
+import frc.robot.sensors.Photoswitch;
+import frc.robot.sensors.Ultrasonic;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.interfaces.Testable;
@@ -20,22 +23,28 @@ public class Sensors extends Subsystem implements Testable {
     private final int NUM_SAMPLES = 10;
     public final int NUM_PHOTOSWITCHES = 3;
 
-    private DigitalInput[] photoswitches;
+    private Photoswitch[] photoswitches;
 
     private final Lidar lidar;
     private int[] lidarValues;
 
     private final AHRS navx;
 
-    private final ArrayList testUnits;
+    private final Ultrasonic ultrasonic;
+
+    private final ArrayList<TestableSensor> testUnits;
 
     public Sensors(){
-        testUnits = new ArrayList();
-        photoswitches = new DigitalInput[NUM_PHOTOSWITCHES];
-        for(int i = 0; i < NUM_PHOTOSWITCHES; i++)
-            photoswitches[i] = new DigitalInput(RobotMap.LIGHT_SENSOR_DIO_PORTS[i]);
-
+        testUnits = new ArrayList<>();
+        photoswitches = new Photoswitch[NUM_PHOTOSWITCHES];
+        for(int i = 0; i < NUM_PHOTOSWITCHES; i++) {
+            photoswitches[i] = new Photoswitch(RobotMap.LIGHT_SENSOR_DIO_PORTS[i]);
+            testUnits.add(photoswitches[i]);
+        }
         lidar = new Lidar(I2C.Port.kMXP, (byte) 0x62);
+        testUnits.add(lidar);
+        ultrasonic = new Ultrasonic(RobotMap.ULTRASONIC_CHANNEL);
+        testUnits.add(ultrasonic);
         navx = new AHRS(SPI.Port.kMXP);
         lidarValues = new int[NUM_SAMPLES];
     }
@@ -51,6 +60,9 @@ public class Sensors extends Subsystem implements Testable {
         return ret;
     }
 
+    public double getUltrasonicDistance(){
+        return ultrasonic.getDistance();
+    }
     public int getLidarDistance(){
         return lidar.getDistance();
     }
@@ -100,45 +112,25 @@ public class Sensors extends Subsystem implements Testable {
 
     @Override
     public void testUnit(int index, boolean status) {
-
+        if(status)
+            testUnits.get(index).test();
+        else
+            testUnits.get(index).getStatus();
     }
 
     @Override
     public void resetTest() {
-
+        for(TestableSensor testableSensor : testUnits)
+            testableSensor.resetTest();
     }
 
     @Override
     public int getUnitAmount() {
-        return 0;
+        return testUnits.size();
     }
 
     @Override
     public Subsystem getRobotSubsystem() {
-        return null;
+        return this;
     }
-
-//    private class TestableSensor{
-//        private DigitalInput digSensor;
-//        private PIDSource pidSensor;
-//        private String name;
-//        private SensorType type;
-//        private double last;
-//
-//        TestableSensor(DigitalInput sensor, String name){
-//            digSensor = sensor;
-//            type = SensorType.Digital;
-//            this.name = name;
-//        }
-//
-//        TestableSensor(PIDSource sensor, String name){
-//            pidSensor = sensor;
-//            type = SensorType.PID;
-//            this.name = name;
-//        }
-//
-//        void test(){
-//            double current;
-//        }
-//    }
 }
