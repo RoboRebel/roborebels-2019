@@ -19,7 +19,6 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.Sensors;
 import frc.robot.subsystems.Shooter;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * The VM is configured to automatically run this class, and to call the
