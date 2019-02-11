@@ -3,15 +3,14 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class Shoot extends Command {
-    public Shoot(){
+public class Suck extends Command {
+    public Suck(){
         this.requires(Robot.shooter);
-//        this.requires(Robot.drivetrain);
     }
 
     @Override
     protected void execute() {
-        Robot.shooter.set(1.0);
+        Robot.shooter.set(-0.5);
     }
 
     @Override

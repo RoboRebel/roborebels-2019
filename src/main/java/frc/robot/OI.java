@@ -47,6 +47,7 @@ public class OI {
   // button.whenReleased(new ExampleCommand());
 
   private final Joystick xboxController;
+  private final Joystick ps4Controller;
   private final JoystickButton oneLineTrackButton;
   private final JoystickButton wallDriveButton;
   private final JoystickButton driveStraightButton;
@@ -54,6 +55,8 @@ public class OI {
   private final JoystickButton acquireLineButton;
   private final JoystickButton PIDDriveButton;
   private final JoystickButton shootButton;
+  private final JoystickButton suckButton;
+  private final JoystickButton climbButton;
   private final DPadTrigger testPneumaticsButton;
   private final DPadTrigger testDrivetrainButton;
   private final DPadTrigger testShooterButton;
@@ -64,9 +67,10 @@ public class OI {
   }
 
   public OI(){
-    xboxController = new Joystick(0);
+    xboxController = new Joystick(RobotMap.XBOX_CONTROLLER_PORT);
+    ps4Controller = new Joystick(RobotMap.PS4_CONTROLLER_PORT);
 
-    oneLineTrackButton = new JoystickButton(xboxController, 1);
+    oneLineTrackButton = new JoystickButton(xboxController, 7);
     oneLineTrackButton.whileHeld(new OneSensorLineTrack());
 
     wallDriveButton = new JoystickButton(xboxController, 2);
@@ -84,10 +88,16 @@ public class OI {
     PIDDriveButton = new JoystickButton(xboxController, 6);
     PIDDriveButton.whileHeld(new PIDDriveStraight());
 
-    shootButton = new JoystickButton(xboxController, 7);
+    suckButton = new JoystickButton(ps4Controller, 3);
+    suckButton.whileHeld(new Suck());
+
+    shootButton = new JoystickButton(ps4Controller, 1);
     shootButton.whileHeld(new Shoot());
 
-    testPneumaticsButton = new DPadTrigger(xboxController, 0);
+    climbButton = new JoystickButton(ps4Controller, 2);
+    climbButton.whileHeld(new Climb());
+
+    testPneumaticsButton = new DPadTrigger(ps4Controller, 0);
     testPneumaticsButton.whileActive(new TestSubsystem(Robot.pneumatics));
 
     testDrivetrainButton = new DPadTrigger(xboxController, 90);
@@ -104,19 +114,27 @@ public class OI {
     return this.xboxController;
   }
 
-  public void buzz(double intensity, Side side){
+  public Joystick getPs4Controller(){
+    return this.ps4Controller;
+  }
+
+  public Joystick getMainController(){
+    return getPs4Controller();
+  }
+
+  public void buzz(Joystick controller, double intensity, Side side){
     switch (side){
       case Left:
-        this.xboxController.setRumble(GenericHID.RumbleType.kLeftRumble, intensity);
-        this.xboxController.setRumble(GenericHID.RumbleType.kRightRumble, 0);
+        controller.setRumble(GenericHID.RumbleType.kLeftRumble, intensity);
+        controller.setRumble(GenericHID.RumbleType.kRightRumble, 0);
         break;
       case Right:
-        this.xboxController.setRumble(GenericHID.RumbleType.kLeftRumble, 0);
-        this.xboxController.setRumble(GenericHID.RumbleType.kRightRumble, intensity);
+        controller.setRumble(GenericHID.RumbleType.kLeftRumble, 0);
+        controller.setRumble(GenericHID.RumbleType.kRightRumble, intensity);
         break;
       case Both:
-        this.xboxController.setRumble(GenericHID.RumbleType.kLeftRumble, intensity);
-        this.xboxController.setRumble(GenericHID.RumbleType.kRightRumble, intensity);
+        controller.setRumble(GenericHID.RumbleType.kLeftRumble, intensity);
+        controller.setRumble(GenericHID.RumbleType.kRightRumble, intensity);
     }
   }
 }

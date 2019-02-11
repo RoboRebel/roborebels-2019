@@ -38,6 +38,7 @@ public class Ultrasonic implements TestableSensor {
 
     @Override
     public String getStatus() {
-        return String.format("Ultrasonic sensor on port %d average distance(mm) over test: %d", this.port, testValue);
+//        this.resetTest();
+        return String.format("Ultrasonic sensor on port %d average distance(mm) over test: %f", this.port, testValue);
     }
 }

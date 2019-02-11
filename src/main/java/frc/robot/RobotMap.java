@@ -40,17 +40,21 @@ public class RobotMap {
   public static final int RIGHT_ENCODER_CHANNEL_A = 3;
   public static final int RIGHT_ENCODER_CHANNEL_B = 4;
 
-  public static final int FRONT_RIGHT_CLIMBING_SOLENOID = 0;
-  public static final int FRONT_LEFT_CLIMBING_SOLENOID = 1;
-  public static final int BACK_RIGHT_CLIMBING_SOLENOID = 2;
-  public static final int BACK_LEFT_CLIMBING_SOLENOID = 3;
-  public static final int HATCH_HOLDING_SOLENOID = 4;
-  public static final int HATCH_PUSHING_SOLENOID = 5;
+  public static final int FRONT_RIGHT_CLIMBING_SOLENOID = 2;
+  public static final int FRONT_LEFT_CLIMBING_SOLENOID = 3;
+  public static final int BACK_RIGHT_CLIMBING_SOLENOID = 4;
+  public static final int BACK_LEFT_CLIMBING_SOLENOID = 5;
+  public static final int HATCH_HOLDING_SOLENOID = 0;
+  public static final int HATCH_PUSHING_SOLENOID = 1;
 
-  public static final int[] LIGHT_SENSOR_DIO_PORTS = {0, 5, 6};
+  //left, center, right
+  public static final int[] LIGHT_SENSOR_DIO_PORTS = {7, 8, 9};
   public static final int LIGHT_SENSOR_1_DIO_PORT = 0;
   public static final int LIGHT_SENSOR_2_DIO_PORT = 5;
   public static final int LIGHT_SENSOR_3_DIO_PORT = 6;
 
   public static final int ULTRASONIC_CHANNEL = 1;
+
+  public static final int PS4_CONTROLLER_PORT = 0;
+  public static final int XBOX_CONTROLLER_PORT = 1;
 }

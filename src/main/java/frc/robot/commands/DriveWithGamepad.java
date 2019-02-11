@@ -7,11 +7,13 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import org.opencv.core.Mat;
 
 public class DriveWithGamepad extends Command {
+  private Joystick controller;
   public DriveWithGamepad() {
     requires(Robot.drivetrain);
   }
@@ -19,14 +21,14 @@ public class DriveWithGamepad extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
+    controller = Robot.oi.getMainController();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double left = (-trim(Robot.oi.getXboxController().getRawAxis(1))) + (trim(Robot.oi.getXboxController().getRawAxis(3)) - trim(Robot.oi.getXboxController().getRawAxis(2)));
-    double right = (-trim(Robot.oi.getXboxController().getRawAxis(5))) + (trim(Robot.oi.getXboxController().getRawAxis(3)) - trim(Robot.oi.getXboxController().getRawAxis(2)));
+    double left = (-trim(controller.getRawAxis(1))) + (trim(controller.getRawAxis(3)) - trim(controller.getRawAxis(2)));
+    double right = (-trim(controller.getRawAxis(5))) + (trim(controller.getRawAxis(3)) - trim(controller.getRawAxis(2)));
     Robot.drivetrain.tankDrive(trim(left), trim(right));
   }
 

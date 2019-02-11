@@ -143,6 +143,7 @@ public class Lidar implements PIDSource, TestableSensor {
 
     @Override
     public String getStatus() {
+//        this.resetTest();
         return String.format("LIDAR on port %s average distance(mm) over test: %d", port.name() ,testResult);
     }
 }

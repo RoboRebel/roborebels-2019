@@ -5,17 +5,19 @@ import frc.robot.OI;
 import frc.robot.Robot;
 
 public class BuzzBuzz extends Command {
+
+
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
         if(Robot.sensors.getPhotoswitchStatus(1)){
-            Robot.oi.buzz(1.0, OI.Side.Both);
+            Robot.oi.buzz(Robot.oi.getMainController(), 1.0, OI.Side.Both);
         }else  if(Robot.sensors.getPhotoswitchStatus(0)){
-            Robot.oi.buzz(1.0, OI.Side.Right);
+            Robot.oi.buzz(Robot.oi.getMainController(),1.0, OI.Side.Right);
         }else if(Robot.sensors.getPhotoswitchStatus(2)){
-            Robot.oi.buzz(1.0, OI.Side.Left);
+            Robot.oi.buzz(Robot.oi.getMainController(), 1.0, OI.Side.Left);
         }else {
-            Robot.oi.buzz(0, OI.Side.Both);
+            Robot.oi.buzz(Robot.oi.getMainController(), 0, OI.Side.Both);
         }
     }
 
@@ -23,5 +25,16 @@ public class BuzzBuzz extends Command {
     @Override
     protected boolean isFinished() {
         return false;
+    }
+
+
+    @Override
+    protected void end() {
+        Robot.oi.buzz(Robot.oi.getMainController(), 0, OI.Side.Both);
+    }
+
+    @Override
+    protected void interrupted() {
+        this.end();
     }
 }

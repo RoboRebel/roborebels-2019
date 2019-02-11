@@ -21,11 +21,21 @@ public class TimedBuzz extends Command {
 
     @Override
     protected void execute() {
-        Robot.oi.buzz(1.0, OI.Side.Both);
+        Robot.oi.buzz(Robot.oi.getMainController(), 1.0, OI.Side.Both);
     }
 
     @Override
     protected boolean isFinished() {
         return timer.hasPeriodPassed(time);
+    }
+
+    @Override
+    protected void end() {
+        Robot.oi.buzz(Robot.oi.getMainController(), 0, OI.Side.Both);
+    }
+
+    @Override
+    protected void interrupted() {
+        this.end();
     }
 }

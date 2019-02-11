@@ -26,7 +26,7 @@ public class Photoswitch extends DigitalInput implements TestableSensor {
 
     @Override
     public void test() {
-        if(this.get())
+        if(!this.get())
             onCount++;
         else
             offCount++;
@@ -34,6 +34,7 @@ public class Photoswitch extends DigitalInput implements TestableSensor {
 
     @Override
     public String getStatus() {
+//        this.resetTest();
         return String.format("Photoswitch on port %d had %d on counts and %d off counts", port, onCount, offCount);
     }
 }
