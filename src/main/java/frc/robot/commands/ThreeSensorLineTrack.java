@@ -3,8 +3,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-import java.util.Arrays;
-
 public class ThreeSensorLineTrack extends Command {
     private double startAngle;
 
