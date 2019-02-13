@@ -48,19 +48,6 @@ public class OI {
 
   private final Joystick xboxController;
   private final Joystick ps4Controller;
-  private final JoystickButton oneLineTrackButton;
-  private final JoystickButton wallDriveButton;
-  private final JoystickButton driveStraightButton;
-  private final JoystickButton threeLineTrackButton;
-  private final JoystickButton acquireLineButton;
-  private final JoystickButton PIDDriveButton;
-  private final JoystickButton shootButton;
-  private final JoystickButton suckButton;
-  private final JoystickButton climbButton;
-  private final DPadTrigger testPneumaticsButton;
-  private final DPadTrigger testDrivetrainButton;
-  private final DPadTrigger testShooterButton;
-  private final DPadTrigger testSensorButton;
 
   public enum Side{
     Left, Right, Both
@@ -70,43 +57,46 @@ public class OI {
     xboxController = new Joystick(RobotMap.XBOX_CONTROLLER_PORT);
     ps4Controller = new Joystick(RobotMap.PS4_CONTROLLER_PORT);
 
-    oneLineTrackButton = new JoystickButton(xboxController, 7);
+    JoystickButton oneLineTrackButton = new JoystickButton(xboxController, 7);
     oneLineTrackButton.whileHeld(new OneSensorLineTrack());
 
-    wallDriveButton = new JoystickButton(xboxController, 2);
+    JoystickButton wallDriveButton = new JoystickButton(xboxController, 2);
     wallDriveButton.whileHeld(new DriveToWall());
 
-    driveStraightButton = new JoystickButton(xboxController, 3);
+    JoystickButton driveStraightButton = new JoystickButton(xboxController, 3);
     driveStraightButton.whileHeld(new GyroDriveStraight());
 
-    threeLineTrackButton = new JoystickButton(xboxController, 4);
+    JoystickButton threeLineTrackButton = new JoystickButton(xboxController, 4);
     threeLineTrackButton.whileHeld(new ThreeSensorLineTrack());
 
-    acquireLineButton = new JoystickButton(xboxController, 5);
+    JoystickButton acquireLineButton = new JoystickButton(xboxController, 5);
     acquireLineButton.whileHeld(new AcquireLine());
 
-    PIDDriveButton = new JoystickButton(xboxController, 6);
+    JoystickButton PIDDriveButton = new JoystickButton(xboxController, 6);
     PIDDriveButton.whileHeld(new PIDDriveStraight());
 
-    suckButton = new JoystickButton(ps4Controller, 3);
+    JoystickButton suckButton = new JoystickButton(ps4Controller, 3);
     suckButton.whileHeld(new Suck());
 
-    shootButton = new JoystickButton(ps4Controller, 1);
+    JoystickButton shootButton = new JoystickButton(ps4Controller, 1);
     shootButton.whileHeld(new Shoot());
 
-    climbButton = new JoystickButton(ps4Controller, 2);
+    JoystickButton climbButton = new JoystickButton(ps4Controller, 2);
     climbButton.whileHeld(new Climb());
 
-    testPneumaticsButton = new DPadTrigger(ps4Controller, 0);
+    JoystickButton hatchPickupButton = new JoystickButton(ps4Controller, 4);
+    hatchPickupButton.whileHeld(new HatchPickup());
+
+    DPadTrigger testPneumaticsButton = new DPadTrigger(ps4Controller, 0);
     testPneumaticsButton.whileActive(new TestSubsystem(Robot.pneumatics));
 
-    testDrivetrainButton = new DPadTrigger(xboxController, 90);
+    DPadTrigger testDrivetrainButton = new DPadTrigger(xboxController, 90);
     testDrivetrainButton.whileActive(new TestSubsystem(Robot.drivetrain));
 
-    testShooterButton = new DPadTrigger(xboxController, 180);
+    DPadTrigger testShooterButton = new DPadTrigger(xboxController, 180);
     testShooterButton.whileActive(new TestSubsystem(Robot.shooter));
 
-    testSensorButton = new DPadTrigger(xboxController, 270);
+    DPadTrigger testSensorButton = new DPadTrigger(xboxController, 270);
     testSensorButton.whileActive(new TestSubsystem(Robot.sensors));
   }
 

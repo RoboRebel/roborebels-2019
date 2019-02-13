@@ -48,19 +48,19 @@ public class Drivetrain extends Subsystem implements Testable {
   }
 
   public double getLeftEncoderSpeed(){
-    return frontLeft.getSelectedSensorVelocity();
+    return getLeftEncoderTalon().getSelectedSensorVelocity();
   }
 
   public double getRightEncoderSpeed(){
-    return backRight.getSelectedSensorVelocity();
+    return getRightEncoderTalon().getSelectedSensorVelocity();
   }
 
   public double getRightEncoderDistance(){
-    return backRight.getSelectedSensorPosition();
+    return getRightEncoderTalon().getSelectedSensorPosition();
   }
 
   public double getLeftEncoderDistance(){
-    return frontLeft.getSelectedSensorPosition();
+    return getLeftEncoderTalon().getSelectedSensorPosition();
   }
 
   public WPI_TalonSRX getLeftEncoderTalon(){

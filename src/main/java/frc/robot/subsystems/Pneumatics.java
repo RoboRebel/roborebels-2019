@@ -46,6 +46,14 @@ public class Pneumatics extends Subsystem implements Testable {
         backRightClimbing.set(val);
     }
 
+    public void setHatchPushing(boolean val){
+        hatchPushing.set(val);
+    }
+
+    public void setHatchHolding(boolean val){
+        hatchHolding.set(val);
+    }
+
     public void testUnit(int index, boolean set){
         testList.get(index).set(set);
     }
