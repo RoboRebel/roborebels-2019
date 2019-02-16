@@ -102,7 +102,6 @@ public class Sensors extends Subsystem implements Testable {
         SmartDashboard.putNumber("Left encoder distance", Robot.drivetrain.getLeftEncoderDistance());
         SmartDashboard.putNumber("AVG LIDAR Distance (in)", getAvgLidarDistance());
         SmartDashboard.putNumber("NavX Yaw", getNavXYaw());
-        SmartDashboard.putNumber("POV", Robot.oi.getXboxController().getPOV());
     }
 
     @Override

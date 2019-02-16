@@ -54,7 +54,4 @@ public class RobotMap {
   public static final int LIGHT_SENSOR_3_DIO_PORT = 6;
 
   public static final int ULTRASONIC_CHANNEL = 1;
-
-  public static final int PS4_CONTROLLER_PORT = 0;
-  public static final int XBOX_CONTROLLER_PORT = 1;
 }

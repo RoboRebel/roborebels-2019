@@ -10,8 +10,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.commands.*;
 import frc.robot.sensors.DPadTrigger;
+
+import static frc.robot.ControlMap.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -54,40 +57,38 @@ public class OI {
   }
 
   public OI(){
-    xboxController = new Joystick(RobotMap.XBOX_CONTROLLER_PORT);
-    ps4Controller = new Joystick(RobotMap.PS4_CONTROLLER_PORT);
+    xboxController = new Joystick(ControlMap.XBOX_CONTROLLER_PORT);
+    ps4Controller = new Joystick(ControlMap.PS4_CONTROLLER_PORT);
 
-    JoystickButton oneLineTrackButton = new JoystickButton(xboxController, 7);
-    oneLineTrackButton.whileHeld(new OneSensorLineTrack());
+//    JoystickButton oneLineTrackButton = new JoystickButton(xboxController, 7);
+//    oneLineTrackButton.whileHeld(new OneSensorLineTrack());
 
-    JoystickButton wallDriveButton = new JoystickButton(xboxController, 2);
-    wallDriveButton.whileHeld(new DriveToWall());
+//    JoystickButton wallDriveButton = new JoystickButton(xboxController, 2);
+//    wallDriveButton.whileHeld(new DriveToWall());
 
-    JoystickButton driveStraightButton = new JoystickButton(xboxController, 3);
-    driveStraightButton.whileHeld(new GyroDriveStraight());
+//    JoystickButton driveStraightButton = new JoystickButton(xboxController, 3);
+//    driveStraightButton.whileHeld(new GyroDriveStraight());
 
-    JoystickButton threeLineTrackButton = new JoystickButton(xboxController, 4);
-    threeLineTrackButton.whileHeld(new ThreeSensorLineTrack());
+//    JoystickButton acquireLineButton = new JoystickButton(xboxController, 5);
+//    acquireLineButton.whileHeld(new AcquireLine());
 
-    JoystickButton acquireLineButton = new JoystickButton(xboxController, 5);
-    acquireLineButton.whileHeld(new AcquireLine());
+//    JoystickButton PIDDriveButton = new JoystickButton(xboxController, 6);
+//    PIDDriveButton.whileHeld(new PIDDriveStraight());
 
-    JoystickButton PIDDriveButton = new JoystickButton(xboxController, 6);
-    PIDDriveButton.whileHeld(new PIDDriveStraight());
+    makeButton(LINE_TRACK_CONTROLLER_PORT, LINE_TRACK_CONTROLLER_BUTTON, new ThreeSensorLineTrack());
 
-    JoystickButton suckButton = new JoystickButton(ps4Controller, 3);
-    suckButton.whileHeld(new Suck());
+    makeButton(SUCK_CONTROLLER_PORT, SUCK_CONTROLLER_BUTTON, new Suck());
 
-    JoystickButton shootButton = new JoystickButton(ps4Controller, 1);
-    shootButton.whileHeld(new Shoot());
+    makeButton(SHOOT_CONTROLLER_PORT, SHOOT_CONTROLLER_BUTTON, new Shoot());
 
-    JoystickButton climbButton = new JoystickButton(ps4Controller, 2);
-    climbButton.whileHeld(new Climb());
+    makeButton(CLIMB_CONTROLLER_PORT, CLIMB_CONTROLLER_BUTTON, new Climb());
 
-    JoystickButton hatchPickupButton = new JoystickButton(ps4Controller, 4);
-    hatchPickupButton.whileHeld(new HatchPickup());
+    makeButton(HATCH_PICKUP_CONTROLLER_PORT, HATCH_PICKUP_CONTROLLER_BUTTON, new HatchPickup());
 
-    DPadTrigger testPneumaticsButton = new DPadTrigger(ps4Controller, 0);
+    makeButton(HATCH_DROPOFF_CONTROLLER_PORT, HATCH_DROPOFF_CONTROLLER_BUTTON, new HatchDropoff());
+
+    //testing buttons, all on dpad
+    DPadTrigger testPneumaticsButton = new DPadTrigger(xboxController, 0);
     testPneumaticsButton.whileActive(new TestSubsystem(Robot.pneumatics));
 
     DPadTrigger testDrivetrainButton = new DPadTrigger(xboxController, 90);
@@ -100,16 +101,16 @@ public class OI {
     testSensorButton.whileActive(new TestSubsystem(Robot.sensors));
   }
 
-  public Joystick getXboxController(){
-    return this.xboxController;
+  public Joystick getController(int port){
+    if(port == XBOX_CONTROLLER_PORT)
+      return this.xboxController;
+    else if (port == PS4_CONTROLLER_PORT)
+      return this.ps4Controller;
+    return null;
   }
 
-  public Joystick getPs4Controller(){
-    return this.ps4Controller;
-  }
-
-  public Joystick getMainController(){
-    return getPs4Controller();
+  private void makeButton(int controllerPort, int buttonNum, Command command){
+    new JoystickButton(getController(controllerPort), buttonNum).whileHeld(command);
   }
 
   public void buzz(Joystick controller, double intensity, Side side){

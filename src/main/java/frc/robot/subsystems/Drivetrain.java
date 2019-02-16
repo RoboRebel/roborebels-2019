@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -29,14 +30,22 @@ public class Drivetrain extends Subsystem implements Testable {
     testList = new ArrayList<>();
 
     frontLeft = new WPI_TalonSRX(RobotMap.FRONT_LEFT_CANTALON);
+    frontLeft.setNeutralMode(NeutralMode.Brake);
+    frontLeft.configOpenloopRamp(0.1);
     testList.add(frontLeft);
     backLeft = new WPI_TalonSRX(RobotMap.BACK_LEFT_CANTALON);
+    backLeft.setNeutralMode(NeutralMode.Brake);
+    backLeft.configOpenloopRamp(0.1);
     testList.add(backLeft);
     left = new SpeedControllerGroup(frontLeft, backLeft);
 
     frontRight = new WPI_TalonSRX(RobotMap.FRONT_RIGHT_CANTALON);
+    frontRight.setNeutralMode(NeutralMode.Brake);
+    frontRight.configOpenloopRamp(0.1);
     testList.add(frontRight);
     backRight = new WPI_TalonSRX(RobotMap.BACK_RIGHT_CANTALON);
+    backRight.setNeutralMode(NeutralMode.Brake);
+    backRight.configOpenloopRamp(0.1);
     testList.add(backRight);
     right = new SpeedControllerGroup(frontRight, backRight);
     right.setInverted(true);

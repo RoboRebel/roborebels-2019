@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
+import static frc.robot.ControlMap.*;
 import frc.robot.Robot;
 import org.opencv.core.Mat;
 
@@ -21,14 +22,14 @@ public class DriveWithGamepad extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    controller = Robot.oi.getMainController();
+    controller = Robot.oi.getController(DRIVE_CONTROLLER_PORT);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double left = (-trim(controller.getRawAxis(1))) + (trim(controller.getRawAxis(3)) - trim(controller.getRawAxis(2)));
-    double right = (-trim(controller.getRawAxis(5))) + (trim(controller.getRawAxis(3)) - trim(controller.getRawAxis(2)));
+    double left = (-trim(controller.getRawAxis(LEFT_STICK_Y_AXIS))) + (trim(controller.getRawAxis(RIGHT_TRIGGER)) - trim(controller.getRawAxis(LEFT_TRIGGER)));
+    double right = (-trim(controller.getRawAxis(RIGHT_STICK_Y_AXIS))) + (trim(controller.getRawAxis(RIGHT_TRIGGER)) - trim(controller.getRawAxis(LEFT_TRIGGER)));
     Robot.drivetrain.tankDrive(trim(left), trim(right));
   }
 

@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.ControlMap;
 import frc.robot.OI;
 import frc.robot.Robot;
 
@@ -21,7 +22,7 @@ public class TimedBuzz extends Command {
 
     @Override
     protected void execute() {
-        Robot.oi.buzz(Robot.oi.getMainController(), 1.0, OI.Side.Both);
+        Robot.oi.buzz(Robot.oi.getController(ControlMap.BUZZ_CONTROLLER_PORT), 1.0, OI.Side.Both);
     }
 
     @Override
@@ -31,7 +32,7 @@ public class TimedBuzz extends Command {
 
     @Override
     protected void end() {
-        Robot.oi.buzz(Robot.oi.getMainController(), 0, OI.Side.Both);
+        Robot.oi.buzz(Robot.oi.getController(ControlMap.BUZZ_CONTROLLER_PORT), 0, OI.Side.Both);
     }
 
     @Override
