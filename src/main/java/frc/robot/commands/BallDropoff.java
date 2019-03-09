@@ -1,9 +1,6 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
-
-import javax.management.timer.Timer;
 
 public class BallDropoff extends Command {
     public BallDropoff() {
@@ -25,4 +22,9 @@ public class BallDropoff extends Command {
     protected void end() {
         Robot.shooter.set(0);
     }
+    @Override
+    protected void interrupted() {
+        this.end();
+    }
 }
+
