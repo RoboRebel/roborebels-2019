@@ -2,27 +2,27 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
+import frc.robot.ControlMap;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class HatchDropoff extends Command {
-    Timer timer;
 
     public HatchDropoff(){
         requires(Robot.pneumatics);
-        timer = new Timer();
     }
     @Override
     protected void initialize() {
         Robot.pneumatics.setHatchPushing(false);
-        timer.start();
     }
 
     @Override
     protected void execute() {
+        Robot.drivetrain.tankDrive(0.2, 0.2);
         Robot.pneumatics.setHatchPushing(true);
-        if(timer.get() >= 0.25)
+        if(Robot.oi.getController(ControlMap.HATCH_DROPOFF_CONTROLLER_PORT).getRawButton(ControlMap.HATCH_DROPOFF_RELEASE_BUTTON)){
             Robot.pneumatics.setHatchHolding(false);
+        }
     }
 
     @Override

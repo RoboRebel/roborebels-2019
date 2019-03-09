@@ -83,7 +83,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-//    (new BuzzBuzz()).start();
+    (new BuzzBuzz()).start();
   }
 
   /**

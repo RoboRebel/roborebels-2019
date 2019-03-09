@@ -87,6 +87,9 @@ public class OI {
 
     makeButton(HATCH_DROPOFF_CONTROLLER_PORT, HATCH_DROPOFF_CONTROLLER_BUTTON, new HatchDropoff());
 
+//    makeButton(XBOX_CONTROLLER_PORT, RIGHT_BUMPER, new SendIt());
+//
+//    makeButton(XBOX_CONTROLLER_PORT, LEFT_BUMPER, new ToggleVisionRing());
     //testing buttons, all on dpad
     DPadTrigger testPneumaticsButton = new DPadTrigger(xboxController, 0);
     testPneumaticsButton.whileActive(new TestSubsystem(Robot.pneumatics));
@@ -102,11 +105,7 @@ public class OI {
   }
 
   public Joystick getController(int port){
-    if(port == XBOX_CONTROLLER_PORT)
-      return this.xboxController;
-    else if (port == PS4_CONTROLLER_PORT)
-      return this.ps4Controller;
-    return null;
+    return this.xboxController;
   }
 
   private void makeButton(int controllerPort, int buttonNum, Command command){

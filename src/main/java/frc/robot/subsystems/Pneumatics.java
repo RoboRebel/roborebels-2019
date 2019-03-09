@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -17,6 +18,8 @@ public class Pneumatics extends Subsystem implements Testable {
     private final Solenoid hatchHolding;
     private final Solenoid hatchPushing;
 
+    private final Compressor compressor;
+
     private ArrayList<Solenoid> testList;
 
     public Pneumatics(){
@@ -31,9 +34,12 @@ public class Pneumatics extends Subsystem implements Testable {
         testList.add(backLeftClimbing);
 
         hatchHolding = new Solenoid(RobotMap.HATCH_HOLDING_SOLENOID);
+        hatchHolding.set(true);
         testList.add(hatchHolding);
         hatchPushing = new Solenoid(RobotMap.HATCH_PUSHING_SOLENOID);
         testList.add(hatchPushing);
+
+        compressor = new Compressor();
     }
 
     public void setFrontClimb(boolean val){

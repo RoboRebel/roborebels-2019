@@ -5,6 +5,7 @@ import frc.robot.Robot;
 
 public class ThreeSensorLineTrack extends Command {
     private double startAngle;
+    private boolean firstPass;
 
     public ThreeSensorLineTrack(){
         requires(Robot.drivetrain);
@@ -13,6 +14,7 @@ public class ThreeSensorLineTrack extends Command {
     @Override
     protected void initialize() {
         startAngle = Robot.sensors.getNavXYaw();
+        firstPass = false;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -27,16 +29,16 @@ public class ThreeSensorLineTrack extends Command {
                 Robot.drivetrain.tankDrive(0.2, 0.2);
                 break;
             case 0b100:
-                Robot.drivetrain.tankDrive(-0.3, 0.3);
+                Robot.drivetrain.tankDrive(0.4, -0.4);
                 break;
             case 0b001:
-                Robot.drivetrain.tankDrive(0.3, -0.3);
+                Robot.drivetrain.tankDrive(-0.4, 0.4);
                 break;
             case 0b110:
-                Robot.drivetrain.tankDrive(0, 0.2);
+                Robot.drivetrain.tankDrive(0.3, 0);
                 break;
             case 0b011:
-                Robot.drivetrain.tankDrive(0.2, 0);
+                Robot.drivetrain.tankDrive(0, 0.3);
                 break;
             default:
                 System.out.println("Something has gone very wrong.");

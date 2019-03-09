@@ -25,7 +25,7 @@ public class Sensors extends Subsystem implements Testable {
 
     private Photoswitch[] photoswitches;
 
-//    private final Lidar lidar;
+    private final Lidar lidar;
     private int[] lidarValues;
 
     private final AHRS navx;
@@ -34,6 +34,8 @@ public class Sensors extends Subsystem implements Testable {
 
     private final ArrayList<TestableSensor> testUnits;
 
+    private final Solenoid visionRing;
+
     public Sensors(){
         testUnits = new ArrayList<>();
         photoswitches = new Photoswitch[NUM_PHOTOSWITCHES];
@@ -41,12 +43,21 @@ public class Sensors extends Subsystem implements Testable {
             photoswitches[i] = new Photoswitch(RobotMap.LIGHT_SENSOR_DIO_PORTS[i]);
             testUnits.add(photoswitches[i]);
         }
-//        lidar = new Lidar(I2C.Port.kMXP, (byte) 0x62);
-//        testUnits.add(lidar);
+        lidar = new Lidar(I2C.Port.kMXP, (byte) 0x62);
+        testUnits.add(lidar);
         ultrasonic = new Ultrasonic(RobotMap.ULTRASONIC_CHANNEL);
         testUnits.add(ultrasonic);
         navx = new AHRS(SPI.Port.kMXP);
         lidarValues = new int[NUM_SAMPLES];
+        visionRing = new Solenoid(7);
+    }
+
+    public void setVisionRing(boolean val){
+        visionRing.set(val);
+    }
+
+    public boolean getVisionRing(){
+        return visionRing.get();
     }
 
     public boolean getPhotoswitchStatus(int index) {
@@ -63,8 +74,9 @@ public class Sensors extends Subsystem implements Testable {
     public double getUltrasonicDistance(){
         return ultrasonic.getDistance();
     }
+
     public int getLidarDistance(){
-        return 0;
+        return lidar.getDistance();
     }
 
     public int getAvgLidarDistance(){
