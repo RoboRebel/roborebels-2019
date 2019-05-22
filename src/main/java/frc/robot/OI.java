@@ -87,6 +87,7 @@ public class OI {
 
     makeButton(HATCH_DROPOFF_CONTROLLER_PORT, HATCH_DROPOFF_CONTROLLER_BUTTON, new HatchDropoff());
 
+    makeButton(SEND_IT_CONTROLLER_PORT, SEND_IT_CONTROLLER_BUTTON, new SendIt());
 //    makeButton(XBOX_CONTROLLER_PORT, RIGHT_BUMPER, new SendIt());
 //
 //    makeButton(XBOX_CONTROLLER_PORT, LEFT_BUMPER, new ToggleVisionRing());

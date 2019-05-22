@@ -20,6 +20,8 @@ public class Pneumatics extends Subsystem implements Testable {
 
     private final Compressor compressor;
 
+    private boolean climbing;
+
     private ArrayList<Solenoid> testList;
 
     public Pneumatics(){
@@ -40,6 +42,16 @@ public class Pneumatics extends Subsystem implements Testable {
         testList.add(hatchPushing);
 
         compressor = new Compressor();
+
+        climbing = false;
+    }
+
+    public boolean isClimbing() {
+        return climbing;
+    }
+
+    public void setClimbing(boolean climbing){
+        this.climbing = climbing;
     }
 
     public void setFrontClimb(boolean val){

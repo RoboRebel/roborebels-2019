@@ -30,6 +30,10 @@ public class DriveWithGamepad extends Command {
   protected void execute() {
     double left = (-trim(controller.getRawAxis(LEFT_STICK_Y_AXIS))) + (trim(controller.getRawAxis(RIGHT_TRIGGER)) - trim(controller.getRawAxis(LEFT_TRIGGER)));
     double right = (-trim(controller.getRawAxis(RIGHT_STICK_Y_AXIS))) + (trim(controller.getRawAxis(RIGHT_TRIGGER)) - trim(controller.getRawAxis(LEFT_TRIGGER)));
+    if(Robot.pneumatics.isClimbing() || Robot.oi.getController(DRIVE_CONTROLLER_PORT).getRawButton(DRIVE_PRECISION_BUTTON)){
+      left = left/3.0;
+      right = right/3.0;
+    }
     Robot.drivetrain.tankDrive(trim(left), trim(right));
   }
 

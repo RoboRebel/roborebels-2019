@@ -41,6 +41,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     oi = new OI();
+
   }
 
   /**
@@ -71,6 +72,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    (new BuzzBuzz()).start();
   }
 
   /**
@@ -92,7 +94,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    sensors.updateShuffleboard();
+//    sensors.updateShuffleboard();
   }
 
   /**

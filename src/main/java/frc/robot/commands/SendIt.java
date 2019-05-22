@@ -5,9 +5,23 @@ import frc.robot.Robot;
 
 public class SendIt extends Command {
 
+    double speed;
+
+    public SendIt(){
+        requires(Robot.drivetrain);
+    }
+
+    @Override
+    protected void initialize() {
+        speed = 0.0;
+    }
+
     @Override
     protected void execute() {
-        Robot.drivetrain.tankDrive(0.75, 0.75);
+        if(speed < 0.75)
+            speed += 0.05;
+        System.out.println(speed);
+        Robot.drivetrain.tankDrive(speed, speed);
     }
 
     @Override

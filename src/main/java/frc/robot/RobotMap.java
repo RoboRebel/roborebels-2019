@@ -43,7 +43,7 @@ public class RobotMap {
   public static final int HATCH_PUSHING_SOLENOID = 5;
 
   //left, center, right
-  public static final int[] LIGHT_SENSOR_DIO_PORTS = {0, 1, 2};
+  public static final int[] LIGHT_SENSOR_DIO_PORTS = {7, 8, 9};
   public static final int LIGHT_SENSOR_1_DIO_PORT = 0;
   public static final int LIGHT_SENSOR_2_DIO_PORT = 5;
   public static final int LIGHT_SENSOR_3_DIO_PORT = 6;

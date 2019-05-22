@@ -31,6 +31,7 @@ public class ControlMap {
     public static final int XBOX_CONTROLLER_PORT = 0;
 
     public static final int DRIVE_CONTROLLER_PORT = XBOX_CONTROLLER_PORT;
+    public static final int DRIVE_PRECISION_BUTTON = LEFT_BUMPER;
     public static final int BUZZ_CONTROLLER_PORT = XBOX_CONTROLLER_PORT;
 
     public static final int LINE_TRACK_CONTROLLER_PORT = XBOX_CONTROLLER_PORT;
@@ -44,11 +45,16 @@ public class ControlMap {
 
     public static final int CLIMB_CONTROLLER_PORT = XBOX_CONTROLLER_PORT;
     public static final int CLIMB_CONTROLLER_BUTTON = BACK_BUTTON;
+    public static final int CLIMB_FRONT_DEPLOY = RIGHT_BUMPER;
+    public static final int CLIMB_REAR_DEPLOY = LEFT_BUMPER;
 
     public static final int HATCH_PICKUP_CONTROLLER_PORT = XBOX_CONTROLLER_PORT;
     public static final int HATCH_PICKUP_CONTROLLER_BUTTON = X_BUTTON;
 
+    public static final int SEND_IT_CONTROLLER_PORT = XBOX_CONTROLLER_PORT;
+    public static final int SEND_IT_CONTROLLER_BUTTON = RIGHT_STICK;
+
     public static final int HATCH_DROPOFF_CONTROLLER_PORT = XBOX_CONTROLLER_PORT;
     public static final int HATCH_DROPOFF_CONTROLLER_BUTTON = Y_BUTTON;
-    public static final int HATCH_DROPOFF_RELEASE_BUTTON = LEFT_BUMPER;
+    public static final int HATCH_DROPOFF_RELEASE_BUTTON = RIGHT_BUMPER;
 }

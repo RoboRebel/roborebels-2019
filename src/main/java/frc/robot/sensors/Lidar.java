@@ -91,7 +91,7 @@ public class Lidar implements PIDSource, TestableSensor {
 			/*SmartDashboard.putNumber("status", status);
 			SmartDashboard.putBoolean("busyFlag", busy);*/
         } while (busyCount < RETRY_COUNT);
-        System.out.println("Distance read timed out");
+//        System.out.println("Distance read timed out");
         return distance;
     }
 
